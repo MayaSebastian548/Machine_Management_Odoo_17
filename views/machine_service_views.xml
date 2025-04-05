@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+<!--    machine service views-->
+    <record id="machine_service_action" model="ir.actions.act_window">
+        <field name="name">Machine Service</field>
+        <field name="res_model">machine.service</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+    <!--    list_view-->
+     <record id="machine_service_view_tree" model="ir.ui.view">
+        <field name="name">machine.service.view.tree</field>
+        <field name="model">machine.service</field>
+        <field name="arch" type="xml">
+            <tree string=" Machine service List">
+                <field name="machine_serial_no"/>
+                <field name="machines_id"/>
+                <field name="customer_id"/>
+                <field name="date_of_service"/>
+                <field name="company_id"/>
+                <field name="service_state"/>
+            </tree>
+        </field>
+    </record>
+    <!--    form_view-->
+    <record id="machine_service_view_form" model="ir.ui.view">
+        <field name="name">machine.service.view.form</field>
+        <field name="model">machine.service</field>
+        <field name="arch" type="xml">
+            <form string="MachineServiceForm">
+                <header>
+                    <button name="start_case" class="oe_highlight" type="object" string="Start"
+                            invisible="service_state in ['started','done','cancel']"/>
+                    <button name="close_case" class="oe_highlight" type="object" string="Close"
+                            invisible="service_state in ['open','done','cancel']"
+                            groups="machine_management.machine_group_techperson"/>
+                    <button name="cancel_case" type="object" string="Cancel"/>
+                    <button name="create_invoice" class="oe_highlight" type="object" string="Create Invoice"
+                            invisible="service_state in ['open','started','cancel']"/>
+                    <field name="service_state" widget="statusbar" statusbar_visible="open,started,done"/>
+                </header>
+                 <sheet>
+                     <div class="oe_title mb24">
+                        <h1>
+                            <field name="machines_id" readonly="1"/>
+                        </h1>
+                     </div>
+                    <group>
+                        <group>
+                            <field name="machines_id"/>
+                            <field name="machine_serial_no"/>
+                            <field name="customer_id"/>
+                            <field name="company_id"/>
+                        </group>
+                        <group>
+                            <field name="date_of_service"/>
+                            <field name="tech_person_ids" widget="many2many_tags"/>
+                            <field name="attachment"/>
+                            <field name="active" invisible="1"  groups="machine_management.machine_group_manager"/>
+                            <field name="website" invisible="1"/>
+                        </group>
+                         <notebook>
+                            <page string="Machine Parts">
+                                <field name="parts_consumed_ids" string="Parts Consumed">
+                                    <tree editable="bottom">
+                                        <field name="machine_parts_id" domain="[('id','in', product_ids)]"/>
+                                        <field name="parts_quantity"/>
+                                        <field name="parts_uom_id"/>
+                                        <field name="parts_price"/>
+                                        <field name="product_ids" invisible="1"/>
+                                    </tree>
+                                </field>
+                            </page>
+                            <page string="Description">
+                                <group>
+                                    <field name="description" string="Description"/>
+                                </group>
+                            </page>
+                            <page string="Internal note">
+                                <field name="internal_note" string="Internal note" placeholder="Internal notes about the Service of Machine"/>
+                            </page>
+                        </notebook>
+                    </group>
+                 </sheet>
+            </form>
+        </field>
+    </record>
+</odoo>

@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--Added service menu in the website-->
+<odoo>
+    <data noupdate="0">
+           <record id="menu_service" model="website.menu">
+               <field name="name">Machine Service</field>
+               <field name="url">/service</field>
+               <field name="parent_id" ref="website.main_menu"/>
+               <field name="sequence">55</field>
+           </record>
+    </data>
+    <data noupdate="0">
+           <record id="menu_services_list" model="website.menu">
+               <field name="name">Service Requests</field>
+               <field name="url">/servicelist</field>
+               <field name="parent_id" ref="website.main_menu"/>
+               <field name="sequence">59</field>
+           </record>
+    </data>
+</odoo>

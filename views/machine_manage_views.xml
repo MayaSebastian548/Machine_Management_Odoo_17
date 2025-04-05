@@ -1,0 +1,190 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+<!--    menu action advance-->
+    <record id="machine_management_action" model="ir.actions.act_window">
+        <field name="name">Machine Management</field>
+        <field name="res_model">machine.management</field>
+        <field name="view_mode">tree,form,kanban</field>
+    </record>
+<!--    list_view-->
+     <record id="machine_management_view_tree" model="ir.ui.view">
+        <field name="name">machine.management.view.tree</field>
+        <field name="model">machine.management</field>
+        <field name="arch" type="xml">
+            <tree string=" Machine List">
+                <field name="serial_no"/>
+                <field name="sequence_no"/>
+                <field name="name"/>
+                <field name="date_of_purchase"/>
+                <field name="currency_id" invisible="1"/>
+                <field name="purchase_value"/>
+                <field name="customer_id"/>
+                <field name="warranty"/>
+                <field name="state"/>
+            </tree>
+        </field>
+    </record>
+<!--    form_view-->
+    <record id="machine_management_view_form" model="ir.ui.view">
+        <field name="name">machine.management.view.form</field>
+        <field name="model">machine.management</field>
+        <field name="arch" type="xml">
+            <form string="MachineForm">
+                <header>
+                    <button name="action_transfer" class="oe_highlight" type="object" string="Transfer Machine"
+                    groups="machine_management.machine_group_manager"/>
+                    <button name="action_services_btn" class="oe_highlight" type="object" string="Add Service"
+                    groups="machine_management.machine_group_manager"/>
+                    <field name="state" widget="statusbar" statusbar_visible="active,inservice"/>
+                </header>
+                <field name="hide" invisible="1"/>
+                <div class="alert alert-danger" role="alert" style="margin-bottom:0px"
+                     invisible="hide != 1">
+                    <bold>
+                        <field name="alert_msg"/>
+                    </bold>
+                </div>
+                 <sheet>
+                     <div class="oe_button_box" name="button_box" >
+                        <button class="oe_stat_button" type="object" string="Transfer History" name="show_history"
+                                        icon="fa-pencil-square-o" invisible="transfer_count == 0">
+                            <div class="o-stat_info">
+                                <span class="o_stat_text">Transfer History</span><br> </br>
+                                <span class="o_stat_value">
+                                    <field name="transfer_count" class="o_stat_value"/>
+                                </span>
+                            </div>
+                        </button>
+                         <button class="oe_stat_button" type="object" string="Service History" name="service_history"
+                                        icon="fa-gear" invisible="service_count == 0">
+                            <div class="o-stat_info">
+                                <span class="o_stat_text">Service History</span><br> </br>
+                                <span class="o_stat_value">
+                                    <field name="service_count" class="o_stat_value"/>
+                                </span>
+                            </div>
+                        </button>
+                     </div>
+                     <div>
+                         <field name="image" widget="image" class="oe_avatar"/>
+                     </div>
+                     <div class="oe_title mb24">
+                        <h1>
+                            <field name="sequence_no" readonly="1"/>
+                        </h1>
+                     </div>
+                    <group>
+                        <group>
+                            <field name="serial_no"/>
+                            <field name="name"/>
+                            <field name="company_id"/>
+                            <field name="machine_types_id"/>
+                            <field name="machine_age"/>
+                            <field name="date_of_purchase"/>
+                            <field name="active" invisible="1"  groups="machine_management.machine_group_manager"/>
+                        </group>
+                        <group>
+                            <field name="service_frequency"/>
+                            <field name="last_service_date"/>
+                            <field name="currency_id" invisible="1"/>
+                            <field name="purchase_value"/>
+                            <field name="customer_id"/>
+                            <field name="warranty"/>
+                            <field name="machine_tags_ids" widget="many2many_tags"/>
+                        </group>
+                        <notebook>
+                            <page string="Machine Parts">
+                                <field name="machine_parts_ids" widget="one2many">
+                                     <tree editable="bottom">
+                                        <field name="machine_parts_id"/>
+                                        <field name="parts_quantity"/>
+                                        <field name="parts_uom_id"/>
+                                        <field name="parts_price"/>
+                                        <field name="product_ids" invisible="1"/>
+                                    </tree>
+                                </field>
+                            </page>
+                            <page string="Description">
+                                <group>
+                                    <field name="description" string="Description"/>
+                                </group>
+                            </page>
+                            <page string="Instructions">
+                                <field name="machine_instructions" string="Instructions" placeholder="Instructions about the operation of Machine"/>
+                            </page>
+                        </notebook>
+                    </group>
+                 </sheet>
+                <div class="oe_chatter">
+                    <field name="message_follower_ids"/>
+                    <field name="message_ids"/>
+                </div>
+            </form>
+        </field>
+    </record>
+<!--    kanban view-->
+     <record id="machine_management_view_kanban" model="ir.ui.view">
+        <field name="name">machine.management.view.kanban</field>
+        <field name="model">machine.management</field>
+        <field name="arch" type="xml">
+            <kanban class="o_kanban_mobile" sample="1" quick_create="false">
+                <field name="name"/>
+                <field name="image"/>
+                <field name="company_id"/>
+                <field name="customer_id"/>
+                <field name="purchase_value"/>
+                <field name="date_of_purchase"/>
+                <field name="state"/>
+                <field name="currency_id"/>
+                <templates>
+                    <t t-name="kanban-box">
+                        <div t-attf-class="oe_kanban_card oe_kanban_global_click">
+                            <div class="o_kanban_record_top mb16">
+                                <div class="o_kanban_record_headings mt4">
+                                    <strong class="o_kanban_record_title">
+                                        <span t-out="record.name.value"/>
+                                    </strong>
+                                </div>
+                                <strong>
+                                    <field name="currency_id" invisible="1"/>
+                                    <field name="purchase_value"/>
+                                </strong>
+                            </div>
+                            <div class="o_kanban_record_bottom">
+                                <div class="oe_kanban_bottom_left text-muted">
+                                    <span>
+                                        <t t-out="record.customer_id.value"/>
+                                    </span>
+                                    <span>
+                                         <t t-out="record.date_of_purchase.value"/>
+                                    </span>
+                                </div>
+                                <div class="oe_kanban_bottom_right">
+                                    <field name="state" widget="label_selection" options="{'classes': {'active': 'Active', 'inservice': 'In Service'}}"/>
+                                </div>
+                            </div>
+                        </div>
+                    </t>
+                </templates>
+            </kanban>
+        </field>
+    </record>
+<!--     search_view,filter,group-->
+    <record id="machine_management_search_tree" model="ir.ui.view">
+        <field name="name">machine_management.search.tree</field>
+        <field name="model">machine.management</field>
+        <field name="arch" type="xml">
+            <search string="Search">
+                <field name="name"/>
+                <field name="machine_tags_ids"/>
+                <filter string="Active" name="active" domain="[('state', '=', 'active')]"/>
+                <filter string="In Service" name="inservice" domain="[('state', '=', 'inservice')]"/>
+                <filter string="Archived" name="archived" domain="[('active', '=', False)]"/>
+                <group expand="1" string="Group By">
+                    <filter string="Machine Type" name="machine_types_id" context="{'group_by':'machine_types_id','residual_visible':True}"/>
+                    <filter string="Machine Tags" name="machine_tags_ids" context="{'group_by':'machine_tags_ids','residual_visible':True}"/>
+                </group>
+            </search>
+        </field>
+    </record>
+</odoo>

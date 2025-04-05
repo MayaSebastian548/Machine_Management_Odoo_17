@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <record id="machine_management_comp_rule" model="ir.rule">
+        <field name="name">Machine Management multi-company</field>
+        <field name="model_id" ref="model_machine_management"/>
+        <field name="domain_force">[('company_id', 'in', company_ids)]</field>
+    </record>
+    <record id="machine_service_comp_rule" model="ir.rule">
+        <field name="name">Machine Service multi-company</field>
+        <field name="model_id" ref="model_machine_service"/>
+        <field name="domain_force">[('company_id', 'in', company_ids)]</field>
+    </record>
+    <record id="machine_transfer_comp_rule" model="ir.rule">
+        <field name="name">Machine Transfer multi-company</field>
+        <field name="model_id" ref="model_machine_transfer"/>
+        <field name="domain_force">[('company_id', 'in', company_ids)]</field>
+    </record>
+    <record id="machine_service_rule_techperson" model="ir.rule">
+        <field name="name">Technical Person Rule</field>
+        <field name="model_id" ref="model_machine_service"/>
+        <field name="domain_force">[('tech_person_ids', '=', user.partner_id.id)]</field>
+        <field name="groups" eval="[Command.link(ref('machine_management.machine_group_techperson'))]"/>
+        <field name="perm_read" eval="True"/>
+        <field name="perm_write" eval="False"/>
+        <field name="perm_create" eval="False"/>
+        <field name="perm_unlink" eval="False"/>
+    </record>
+    <record id="machine_service_rule_manager" model="ir.rule">
+        <field name="name">Manager Rule</field>
+        <field name="model_id" ref="model_machine_service"/>
+        <field name="domain_force">[(1, '=', 1),'|',('active', '=', True),('active', '=', False)]</field>
+        <field name="groups" eval="[Command.link(ref('machine_management.machine_group_manager'))]"/>
+        <field name="perm_read" eval="True"/>
+        <field name="perm_write" eval="True"/>
+        <field name="perm_create" eval="True"/>
+        <field name="perm_unlink" eval="True"/>
+    </record>
+</odoo>

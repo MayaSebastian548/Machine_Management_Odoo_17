@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!--menus-->
+<odoo>
+    <menuitem id="machine_menu_root"
+              name="Machine Management"
+    />
+    <menuitem id="machine_menu_main"
+              name="Machines"
+              parent="machine_menu_root"
+              action="machine_management_action"
+    />
+    <menuitem id="machine_menu_conf"
+              name="Configuration"
+              parent="machine_menu_root"
+    />
+    <menuitem id="machine_menu_report"
+              name="Reporting"
+              parent="machine_menu_root"
+    />
+    <menuitem id="machine_transfer_menu_report"
+              name="Machine Transfer Report"
+              parent="machine_menu_report"
+              action="machine_transfer_wizard_action"
+    />
+    <menuitem id="machine_menu_service"
+              name="Machine Service"
+              parent="machine_menu_conf"
+              action="machine_service_action"
+    />
+    <menuitem id="machine_menu_transfer"
+          name="Machine Transfer"
+          parent="machine_menu_conf"
+          action="machine_transfer_action"
+    />
+     <menuitem id="machine_menu_type"
+          name="Machine Type"
+          parent="machine_menu_conf"
+          action="machine_type_action"
+    />
+</odoo>

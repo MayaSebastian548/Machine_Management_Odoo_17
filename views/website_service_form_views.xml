@@ -1,0 +1,125 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <template id="online_website_service_form">
+        <t t-call="website.layout">
+            <div class="container">
+                <form action="/service/submit" role="form" method="post" id="machine_form">
+                    <input type="hidden" name="csrf_token" t-att-value="request.csrf_token()"/>
+                    <br> </br>
+                    <div class="s_website_form_rows row s_col_no_bgcolor">
+                        <br> </br>
+                        <br> </br>
+                        <br> </br>
+                        <span>
+                            <h3>Machine Services</h3>
+                        </span>
+                        <div class="row">
+                            <div class="col">
+                                <div class="form-group col-12 s_website_form_field s_website_form_required"
+                                     data-type="char" data-name="Field">
+                                    <div class="row s_col_no_resize s_col_no_bgcolor">
+                                        <label class="col-form-label col-sm-auto s_website_form_label"
+                                               style="width: 200px" for="studio1">
+                                            <span class="s_website_form_label_content">Machine</span>
+                                        </label>
+                                        <div class="col-sm">
+                                            <t t-foreach="machines or []" t-as="machine">
+                                                <input id="machine" type="text" t-att-value="machine.name"
+                                                       class="form-control s_website_form_input" name="machine_id"
+                                                       required="1"/>
+                                            </t>
+                                        </div>
+                                    </div>
+                                </div>
+                                <br> </br>
+                                <div class="form-group col-12 s_website_form_field s_website_form_required"
+                                     data-type="char" data-name="Field">
+                                    <div class="row s_col_no_resize s_col_no_bgcolor">
+                                        <label class="col-form-label col-sm-auto s_website_form_label"
+                                               style="width: 200px" for="studio1">
+                                            <span class="s_website_form_label_content">Customer</span>
+                                        </label>
+                                        <div class="col-sm">
+                                            <t t-foreach="machines or []" t-as="machine">
+                                                <input id="customer" type="text" t-att-value="machine.customer_id.name"
+                                                       class="form-control s_website_form_input" name="customer_id"
+                                                       required="1"/>
+                                            </t>
+                                        </div>
+                                    </div>
+                                </div>
+                                <br> </br>
+                                <div class="form-group col-12 s_website_form_field s_website_form_required"
+                                     data-type="char" data-name="Field">
+                                    <div class="row s_col_no_resize s_col_no_bgcolor">
+                                        <label class="col-form-label col-sm-auto s_website_form_label"
+                                               style="width: 200px" for="studio1">
+                                            <span class="s_website_form_label_content">Company</span>
+                                        </label>
+                                        <div class="col-sm">
+                                            <t t-foreach="machines or []" t-as="machine">
+                                                <input id="company" type="text" t-att-value="machine.company_id.name"
+                                                       class="form-control s_website_form_input" name="company_id"
+                                                       required="1"/>
+                                            </t>
+                                        </div>
+                                    </div>
+                                </div>
+                                <br> </br>
+                                <div class="form-group col-12 s_website_form_field s_website_form_required"
+                                     data-type="char" data-name="Field">
+                                    <div class="row s_col_no_resize s_col_no_bgcolor">
+                                        <label class="col-form-label col-sm-auto s_website_form_label"
+                                               style="width: 200px" for="studio1">
+                                            <span class="s_website_form_label_content">Date</span>
+                                        </label>
+                                        <div class="col-sm">
+                                            <input id="date_of_service" type="date"
+                                                   class="form-control s_website_form_input" name="date_of_service"
+                                                   required="1"/>
+                                        </div>
+                                    </div>
+                                </div>
+                                <br> </br>
+                                <div class="form-group col-12 s_website_form_field s_website_form_required"
+                                     data-type="char" data-name="Field">
+                                    <div class="row s_col_no_resize s_col_no_bgcolor">
+                                        <label class="col-form-label col-sm-auto s_website_form_label"
+                                               style="width: 200px" for="studio1">
+                                            <span class="s_website_form_label_content">Attachment</span>
+                                        </label>
+                                        <div class="col-sm">
+                                            <input id="attachment" type="file" class="form-control s_website_form_input"
+                                                   name="attachment" required="1"/>
+                                        </div>
+                                    </div>
+                                </div>
+                                <br> </br>
+                                <div class="form-group col-12 s_website_form_field s_website_form_required"
+                                     data-type="char" data-name="Field">
+                                    <div class="row s_col_no_resize s_col_no_bgcolor">
+                                        <label class="col-form-label col-sm-auto s_website_form_label"
+                                               style="width: 200px" for="studio1">
+                                            <span class="s_website_form_label_content">Description</span>
+                                        </label>
+                                        <div class="col-sm">
+                                            <textarea id="description" class="form-control s_website_form_input"
+                                                      name="description"/>
+                                        </div>
+                                    </div>
+                                </div>
+                                <br> </br>
+                                <div class="form-group col-15 s_website_form_submit" data-name="Submit Button">
+                                    <div style="width: 200px;" class="s_website_form_label"/>
+                                    <button type="submit" class="btn btn-primary" name="machine_form">Submit</button>
+                                </div>
+                                <br> </br>
+                                <br> </br>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </t>
+    </template>
+</odoo>

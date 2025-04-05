@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+<!--    service product-->
+    <data>
+        <record id="service_product_id" model="product.template">
+            <field name="name">Service Cost</field>
+            <field name="detailed_type">service</field>
+            <field name="list_price">10</field>
+            <field name="standard_price">10</field>
+        </record>
+    </data>
+</odoo>

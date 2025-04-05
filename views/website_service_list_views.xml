@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <template id="online_service_list">
+        <t t-call="website.layout">
+            <div id="wrap" class="oe_structure oe_empty">
+                <section class="s_website_form" data-vcss="001" data-snippet="s_website_form">
+                    <div class="container">
+                        <form action="" method="post" enctype="multipart/form-data" class="o_mark_required"
+                              data-mark="*" data-model_name="" data-success-page="">
+                            <br> </br>
+                            <input type="hidden" name="csrf_token" t-att-value="request.csrf_token()"/>
+                            <div class="s_website_form_rows row s_col_no_bgcolor">
+                                <br> </br>
+                                <br> </br>
+                                <br> </br>
+                                <span>
+                                    <h3>Service Requests</h3>
+                                </span>
+                                <div class="row">
+                                    <table class="o_list_table position-relative table table-sm o_list_table_ungrouped table-striped o_portal_my_doc_table mb-0">
+                                        <thead data_oe_model="ir.ui.view" data-oe-field="arch">
+                                            <tr class="active">
+                                                <th>Machine</th>
+                                                <th class="text-center">Customer</th>
+                                                <th class="text-center">Date of Service</th>
+                                                <th class="text-center">User</th>
+                                                <th class="text-end">Company</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <t t-foreach="website_requests or []" t-as="web">
+                                                <tr>
+                                                    <td>
+                                                        <t t-out="web.machines_id.name"/>
+                                                    </td>
+                                                    <td class="text-center">
+                                                        <t t-out="web.customer_id.name"/>
+                                                    </td>
+                                                    <td class="text-center">
+                                                        <t t-out="web.date_of_service"/>
+                                                    </td>
+                                                    <td class="text-center">
+                                                        <t t-esc="user_id.name"/>
+                                                    </td>
+                                                    <td class="text-end">
+                                                        <t t-out="web.company_id.name"/>
+                                                    </td>
+                                                </tr>
+                                            </t>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </section>
+            </div>
+        </t>
+    </template>
+</odoo>

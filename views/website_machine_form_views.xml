@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <template id="online_service_form">
+        <t t-call="website.layout">
+            <div class="container">
+                <form action="" method="post" class="o_mark_required">
+                    <br> </br>
+                    <input type="hidden" name="csrf_token" t-att-value="request.csrf_token()"/>
+                    <div class="s_website_form_rows row s_col_no_bgcolor">
+                        <br> </br> <br> </br> <br> </br>
+                        <span><h3>Inservice Machines</h3></span>
+                        <div class="row">
+                            <t t-foreach="machines or []" t-as="machine">
+                                <div class="col-md-6 col-lg-4 col-xl-3 mb-4">
+                                    <a t-att-href="'/serviceform/%s' % machine.id">
+                                        <div class="card" style="width:300px; text-align:center;">
+                                        <div class="card-body">
+                                            <span t-out="machine.sequence_no"/><br> </br>
+                                            <b><span t-out="machine.name"/></b><br> </br>
+                                            <span t-out="machine.date_of_purchase"/><br> </br>
+                                            <span t-out="machine.currency_id.symbol"/>
+                                            <span t-out="machine.purchase_value"/>
+                                        </div>
+                                    </div>
+                                    </a>
+                                </div>
+                            </t><br> </br>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </t>
+    </template>
+</odoo>

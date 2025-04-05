@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+<!--    machine types inside the machine form-->
+    <data noupdate="1">
+        <record id="my_type_id" model="machine.type">
+            <field name="machine_type">Vending</field>
+        </record>
+        <record id="my_type_i" model="machine.type">
+            <field name="machine_type">Cooler</field>
+        </record>
+        <record id="my_type" model="machine.type">
+            <field name="machine_type">Laundry</field>
+        </record>
+    </data>
+</odoo>

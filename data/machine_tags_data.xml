@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--machine tags inside the machine form-->
+<odoo>
+    <data noupdate="1">
+        <record id="my_tags_id" model="machine.tags">
+            <field name="machine_tags">Energy Saver</field>
+        </record>
+        <record id="my_tags_i" model="machine.tags">
+            <field name="machine_tags">Best Seller</field>
+        </record>
+        <record id="my_tags" model="machine.tags">
+            <field name="machine_tags">New Arrival</field>
+        </record>
+    </data>
+</odoo>

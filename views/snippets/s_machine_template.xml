@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!--    machine snippet-->
+    <template id="machine_snippet" name="Machine Snippet">
+        <section class="container machine_snippet_card">
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="text-center py-5">
+                        <h1 class="h1">Machines</h1>
+                        <div class="h3" style="text-align:center">Latest Machines</div>
+                        <div id="carousel_id">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </template>
+    <!--    snippet option inherit-->
+    <template id="external_snippets" inherit_id="website.snippets" priority="8">
+        <xpath expr="//div[@id='snippet_effect']//t[@t-snippet][last()]" position="after">
+            <t t-snippet="machine_management.machine_snippet"
+               t-thumbnail="/machine_management/static/src/image/settings-icon.svg"/>
+        </xpath>
+    </template>
+</odoo>

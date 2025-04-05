@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <record model="ir.module.category" id="module_category_machine">
+        <field name="name">Machine Management</field>
+        <field name="description">Category for Machine Management</field>
+    </record>
+    <record id="machine_group_techperson" model="res.groups">
+        <field name="name">Service Techperson Access</field>
+        <field name="category_id" ref="machine_management.module_category_machine"/>
+    </record>
+    <record id="machine_group_manager" model="res.groups">
+        <field name="name">Service Manager Access</field>
+        <field name="category_id" ref="machine_management.module_category_machine"/>
+        <field name="implied_ids" eval="[Command.link(ref('machine_management.machine_group_techperson'))]"/>
+    </record>
+</odoo>

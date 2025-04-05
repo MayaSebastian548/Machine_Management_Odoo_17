@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<templates>
+    <t t-name="machine_management.machine_snippet_carousel">
+        <div id="machine_carousel" class="carousel slide position-sticky mb-3 overflow-hidden"
+             data-bs-ride="carousel" data-bs-interval="2000">
+            <div class="carousel-inner row w-200 mx-auto" role="listbox">
+                <t t-foreach="data" t-as="machines" t-key="machines.id">
+                    <div t-att-class="machines.is_active ? 'carousel-item active' : 'carousel-item'"
+                         style="min-height: 205.812px;">
+                        <div class="row">
+                            <t t-foreach="machines" t-as="machine" t-key="machine.id">
+                                <div class="block col-3">
+                                    <br> </br>
+                                    <br> </br>
+                                    <div class="d-flex flex-grow-0 flex-shrink-0 col-4">
+                                        <a t-attf-href="/machine_info/{{machine.id}}"
+                                           class="text-primary text-decoration-none">
+                                            <img class="card-img-top" t-attf-src="data:image;base64,{{machine.image}}"
+                                                 style="padding: 0px; margin: 0px; height: 320px; width:305px;"/>
+                                            <b>
+                                                <h4 class="mb-0" style="font-family:times">
+                                                    <t t-esc="machine.name"/>
+                                                </h4>
+                                            </b>
+                                        </a>
+                                    </div>
+                                    <a t-attf-href="#machine_carousel" class="carousel-control-prev"
+                                       data-bs-slide="prev" role="button" aria-label="Previous" title="Previous">
+                                        <span class="fa fa-chevron-circle-left fa-2x" style="color:black"/>
+                                        <span class="visually-hidden">Previous</span>
+                                    </a>
+                                    <a t-attf-href="#machine_carousel" class="carousel-control-next"
+                                       data-bs-slide="next" role="button" aria-label="Next" title="Next">
+                                        <span class="fa fa-chevron-circle-right fa-2x" style="color:black"/>
+                                        <span class="visually-hidden">Next</span>
+                                    </a>
+                                </div>
+                            </t>
+                        </div>
+                    </div>
+                </t>
+            </div>
+        </div>
+    </t>
+</templates>

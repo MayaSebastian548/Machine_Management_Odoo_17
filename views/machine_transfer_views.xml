@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <!--    machine transfer views-->
+    <record id="machine_transfer_action" model="ir.actions.act_window">
+        <field name="name">Machine Transfer</field>
+        <field name="res_model">machine.transfer</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+    <!--    list_view-->
+    <record id="machine_transfer_view_tree" model="ir.ui.view">
+        <field name="name">machine.transfer.view.tree</field>
+        <field name="model">machine.transfer</field>
+        <field name="arch" type="xml">
+            <tree string=" Machine Transfer List">
+                <field name="machine_serial_no"/>
+                <field name="machine_id"/>
+                <field name="transfer_date"/>
+                <field name="transfer_type"/>
+                <field name="customers_id"/>
+                <field name="states"/>
+            </tree>
+        </field>
+    </record>
+    <!--    form_view-->
+    <record id="machine_transfer_view_form" model="ir.ui.view">
+        <field name="name">machine.transfer.view.form</field>
+        <field name="model">machine.transfer</field>
+        <field name="arch" type="xml">
+            <form string="MachineTransferForm">
+                <header>
+                    <button name="submit" class="oe_highlight" type="object" string="Submit"
+                            invisible="states!='new'"/>
+                    <field name="states" widget="statusbar" statusbar_visible="new,done"/>
+                </header>
+                <field name="hide" invisible="1"/>
+                <div class="alert alert-danger" role="alert" style="margin-bottom:0px"
+                     invisible="hide != 1">
+                    <bold>
+                        <field name="alert_msg"/>
+                    </bold>
+                </div>
+                <sheet>
+                    <div class="oe_title mb24">
+                        <h1>
+                            <field name="machine_id" readonly="1"/>
+                        </h1>
+                    </div>
+                    <group>
+                        <group>
+                            <field name="machine_filters_ids" invisible="1"/>
+                            <field name="machine_id"/>
+                            <field name="machine_serial_no"/>
+                            <field name="transfer_date"/>
+                        </group>
+                        <group>
+                            <field name="transfer_type"/>
+                            <field name="customers_id" invisible="transfer_type!='install'"
+                                   required="transfer_type!='remove'"/>
+                            <field name="active" invisible="1" groups="machine_management.machine_group_manager"/>
+
+                        </group>
+                        <notebook>
+                            <page string="Internal Notes">
+                                <field name="internal_notes" string="Internal Notes"
+                                       placeholder="Internal Notes about the Machine"/>
+                            </page>
+                        </notebook>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+</odoo>

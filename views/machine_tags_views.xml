@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+<!--    machine tags views-->
+    <record id="machine_tags_action" model="ir.actions.act_window">
+        <field name="name">Machine Tags</field>
+        <field name="res_model">machine.tags</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+    <!--    list_view-->
+     <record id="machine_tags_view_tree" model="ir.ui.view">
+        <field name="name">machine.tags.view.tree</field>
+        <field name="model">machine.tags</field>
+        <field name="arch" type="xml">
+            <tree string=" Machine Tags List">
+                <field name="machine_tags"/>
+            </tree>
+        </field>
+    </record>
+    <!--    form_view-->
+    <record id="machine_tags_view_form" model="ir.ui.view">
+        <field name="name">machine.tags.view.form</field>
+        <field name="model">machine.tags</field>
+        <field name="arch" type="xml">
+            <form string="MachineTagsForm">
+                 <sheet>
+                    <group>
+                        <field name="machine_tags"/>
+                    </group>
+                 </sheet>
+            </form>
+        </field>
+    </record>
+</odoo>
